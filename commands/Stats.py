@@ -41,7 +41,7 @@ class Stats(commands.Cog): # обязательная строка. измени
         response.raise_for_status()
         stats = response.json()
 
-        if stats.code != 404:
+        try:
             duel = str(stats["playerRatings"]["duel"]["rating"])
             tdm = str(stats["playerRatings"]["tdm"]["rating"])
             icon_url = "https://dev.quake-champions.com/css/images/profile_icons/" + stats["playerLoadOut"]["iconId"] + ".png"
@@ -50,8 +50,10 @@ class Stats(commands.Cog): # обязательная строка. измени
             embed = quake_template(nickname, duel, tdm, icon_url, stats_url) # добавить matches
 
             await ctx.send(embed=embed)
-        else:
+
+        except AttributeError:
             await ctx.send(f"Не нашел статистику для {nickname} :tired_face:")
+
 
 def setup(bot): # обязательная строка.
     bot.add_cog(Stats(bot)) # обязательная строка. убедись что название класса совпадает с названием класса объявленным ранее.
