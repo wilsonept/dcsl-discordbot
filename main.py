@@ -1,4 +1,4 @@
-from secrets import TOKEN, DEV_ID
+from secrets import COMMAND_TOKEN, DEV_ID
 from discord.ext import commands
 import os
 
@@ -68,4 +68,4 @@ for filename in os.listdir("./commands"):
 
 
 # ============== MAIN LOOP ==============
-bot.run(TOKEN)
+bot.run(COMMAND_TOKEN)
